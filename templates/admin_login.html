@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #e67e22;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .home-btn:hover {
+            background-color: #d35400;
+            transform: translateY(-3px);
+        }
+
+        .home-btn:active {
+            transform: translateY(0);
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .error {
+            color: #d32f2f;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            background-color: rgba(255, 235, 238, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            max-width: 300px;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #e67e22;
+            box-shadow: 0 0 5px rgba(230, 126, 34, 0.3);
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            color: #fff;
+            background-color: #e67e22;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #d35400;
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            input[type="text"],
+            input[type="password"] {
+                max-width: 250px;
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+
+            button {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+
+            .error {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+
+            .home-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+                top: 15px;
+                left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('home') }}" class="home-btn">Home</a>
+    <div class="container">
+        <h1>Admin Login</h1>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

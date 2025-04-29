@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            padding: 20px;
+        }
+
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #e67e22;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .home-btn:hover {
+            background-color: #d35400;
+            transform: translateY(-3px);
+        }
+
+        .home-btn:active {
+            transform: translateY(0);
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            width: 100%;
+            margin: 80px auto 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #e67e22;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+        }
+
+        tr:hover {
+            background-color: rgba(230, 126, 34, 0.1);
+        }
+
+        .remove-btn {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            color: #fff;
+            background-color: #dc3545;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .remove-btn:hover {
+            background-color: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .remove-btn:active {
+            transform: translateY(0);
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            color: #fff;
+            background-color: #e67e22;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            display: block;
+        }
+
+        button:hover {
+            background-color: #d35400;
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            color: #fff;
+            background-color: #e67e22;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 20px 0;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background-color: #d35400;
+            transform: translateY(-3px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+
+            .container {
+                padding: 20px;
+                margin-top: 60px;
+            }
+
+            button, .btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+                width: 80%;
+                margin: 15px auto;
+                display: block;
+            }
+
+            .home-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+                top: 15px;
+                left: 15px;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+
+            .remove-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('home') }}" class="home-btn">Home</a>
+    <div class="container">
+        <h1>Your Cart</h1>
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>₹{{ item.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>₹{{ item.price * item.quantity }}</td>
+                <td>
+                    <button class="remove-btn" data-order-id="{{ item.order_id }}" onclick="removeFromCart(this)">Remove</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button onclick="printCart()">Print Order</button>
+        <a href="{{ url_for('customer_menu') }}" class="btn">Back to Menu</a>
+    </div>
+</body>
+</html>

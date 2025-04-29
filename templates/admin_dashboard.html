@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #e67e22;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .home-btn:hover {
+            background-color: #d35400;
+            transform: translateY(-3px);
+        }
+
+        .home-btn:active {
+            transform: translateY(0);
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            color: #fff;
+            background-color: #e67e22;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background-color: #d35400;
+            transform: translateY(-3px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .logout {
+            background-color: #d32f2f;
+        }
+
+        .logout:hover {
+            background-color: #b71c1c;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .btn {
+                display: block;
+                padding: 12px 30px;
+                font-size: 1rem;
+                margin: 15px auto;
+                width: 80%;
+            }
+
+            .home-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+                top: 15px;
+                left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('home') }}" class="home-btn">Home</a>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <a href="{{ url_for('items_management') }}" class="btn">Manage Items</a>
+        <a href="{{ url_for('orders_view') }}" class="btn">View Orders</a>
+        <a href="{{ url_for('logout') }}" class="btn logout">Logout</a>
+    </div>
+</body>
+</html>
